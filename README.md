@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=eva1029" alt="eva1029" /></a> </p>
 
-- 🔭 I’m currently working on ["零售智慧通" — 一個用 Vue.js + Django 打造的資料視覺化平台](https://github.com/eva1029/Project)
+- 🔭 I’m currently working on ["零售數據通" — 一個用 Vue.js + Django 打造的資料視覺化平台](https://github.com/eva1029/Project)
 
 - 🌱 I’m currently learning **Python, Vue.js 與 RESTfulAPI 整合**
 
