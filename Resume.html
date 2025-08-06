@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>陳以婕 - 履歷</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+
+    body {
+      font-family: 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+      line-height: 1.5;
+      color: #2c3e50;
+      background: white;
+      font-size: 11pt;
+    }
+
+    .resume-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: white;
+      position: relative;
+    }
+
+    .header {
+      background: #34495e;
+      color: white;
+      padding: 25px 30px;
+      margin-bottom: 20px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .photo-section {
+      flex-shrink: 0;
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .header-content {
+      flex: 1;
+    }
+
+    .name {
+      font-size: 28pt;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      font-size: 10pt;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: row-reverse; /* 讓右側內容先出現在列印中 */
+      gap: 25px;
+      align-items: flex-start;
+    }
+
+    .sidebar {
+      background: #f8f9fa;
+      padding: 20px 18px;
+      border: 1px solid #e9ecef;
+      border-radius: 3px;
+    }
+
+    .content {
+      padding: 0 10px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+      break-inside: avoid;
+    }
+
+    .section-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .skill-category {
+      margin-bottom: 12px;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 4px;
+      font-size: 10pt;
+    }
+
+    .skill-list {
+      font-size: 9pt;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .cert-item {
+      background: white;
+      padding: 8px 10px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+      border-left: 3px solid #3498db;
+      border: 1px solid #e9ecef;
+    }
+
+    .cert-name {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 2px;
+      font-size: 9pt;
+    }
+
+    .cert-org {
+      color: #7f8c8d;
+      font-size: 8pt;
+    }
+
+    .education-item, .experience-item {
+      margin-bottom: 20px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .education-item::before, .experience-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 6px;
+      height: 6px;
+      background: #3498db;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px #3498db;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .item-title {
+      font-weight: 700;
+      color: #2c3e50;
+      font-size: 12pt;
+    }
+
+    .item-subtitle {
+      color: #7f8c8d;
+      font-size: 10pt;
+      font-weight: 400;
+    }
+
+    .item-date {
+      background: #ecf0f1;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 8pt;
+      color: #2c3e50;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .item-description {
+      color: #555;
+      line-height: 1.6;
+      font-size: 10pt;
+    }
+
+    .item-description ul {
+      margin-left: 15px;
+      margin-top: 6px;
+    }
+
+    .item-description li {
+      margin-bottom: 4px;
+    }
+
+    .about-text {
+      color: #555;
+      line-height: 1.7;
+      text-align: justify;
+      font-size: 10pt;
+    }
+
+    .project-highlight {
+      background: #f8f9fa;
+      padding: 12px;
+      border-radius: 3px;
+      margin: 12px 0;
+      border-left: 3px solid #3498db;
+      border: 1px solid #e9ecef;
+    }
+
+    .project-title {
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 6px;
+      font-size: 11pt;
+    }
+
+    .project-date {
+      background: #3498db;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 8pt;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .toeic-score {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 9pt;
+      margin-top: 6px;
+    }
+
+    @media print {
+      body {
+        font-size: 10pt;
+        line-height: 1.4;
+      }
+
+      .resume-container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .header {
+        page-break-after: avoid;
+      }
+
+      .section, .experience-item, .education-item {
+        page-break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+      }
+      .contact-info {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <div class="header">
+      <div class="photo-section">
+        <img src="profile.jpg" alt="大頭照" class="profile-photo">
+      </div>
+      <div class="header-content">
+        <div class="name">陳以婕</div>
+        <div class="contact-info">
+          <div class="contact-item">📞 0953-352-786</div>
+          <div class="contact-item">📧 eva.chen102923@gmail.com</div>
+          <div class="contact-item">📍 臺中市北區</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content"></div>
+      <div class="content">
+        <div class="section">
+          <div class="section-title">關於我</div>
+          <div class="about-text">
+            我是陳以婕，畢業於國立臺北商業大學資訊管理系。雖然在五專時期就讀非資工相關科系，但轉入資管系後更加明確目標，培養出願意投入實作、
+            持續成長的學習態度。在專題製作中與團隊開發「智慧零售儀表管理系統」，採用Vue.js + Django + MySQL前後端分離架構，負責管理者後台開發，
+            包括前端介面設計、API開發、使用者權限管理及儀表板CRUD等功能。具備Linux操作基礎與系統部署經驗，對資安與網路架構產生濃厚興趣。
+            我個性穩健務實、做事認真細心，重視團隊合作也具備獨立解決問題的能力，相信「技術可以學，態度更重要」，期望加入重視人才培育的團隊，
+            願意從基礎做起並為團隊創造價值。
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">學歷</div>
+          <div class="education-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">國立臺北商業大學</div>
+                <div class="item-subtitle">資訊管理學系</div>
+              </div>
+              <div class="item-date">2023/9 - 2025/6</div>
+            </div>
+          </div>
+          <div class="education-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">國立臺中科技大學</div>
+                <div class="item-subtitle">企業管理科五專</div>
+              </div>
+              <div class="item-date">2018/9 - 2023/7</div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">專案成果</div>
+          <div class="project-highlight">
+            <div class="project-title">零售智慧通</div>
+            <div class="project-date">2023/11 - 2024/12</div>
+            <div class="item-description">
+              智慧零售儀表管理系統旨在協助中小型零售業者即時掌握營運狀況，提供圖表化儀表板及後台管理功能。系統採 Vue.js + Django 前後端分離架構，串接 ERP/POS 資料，實作多角色登入、權限分層管理、歷程紀錄等模組。
+              <ul>
+                <li>擔任後台主要開發者，設計並實作使用者、角色、模組與權限 CRUD 功能</li>
+                <li>導入雙重驗證與帳號審核流程，強化系統安全性</li>
+                <li>設計並串接 RESTful API，實現與前端 Vue.js 的資料互動</li>
+                <li>完成完整測試流程與操作紀錄查詢模組</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">工作經驗</div>
+          <div class="experience-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">暑期工讀生</div>
+                <div class="item-subtitle">台中市立圖書館東區分館</div>
+              </div>
+              <div class="item-date">2022/7 - 2022/8</div>
+            </div>
+            <div class="item-description">
+              <ul>
+                <li>每日處理 200+ 本書籍，優化館內流程</li>
+                <li>使用 Canva 製作 DIY 宣傳影片</li>
+                <li>支援行政，展現多工處理能力</li>
+              </ul>
+            </div>
+          </div>
+          <div class="experience-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">電訪工讀生</div>
+                <div class="item-subtitle">台中順天儒林補習班</div>
+              </div>
+              <div class="item-date">2021/3 - 2021/6</div>
+            </div>
+            <div class="item-description">
+              <ul>
+                <li>執行電話招生並進行名單追蹤</li>
+                <li>包裝 500+ 宣傳物品，協助行政作業</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar">
+        <div class="section">
+          <div class="section-title">技術能力</div>
+          <div class="skill-category">
+            <div class="skill-name">前端開發</div>
+            <div class="skill-list">HTML5, CSS, JavaScript, Vue.js</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-name">後端開發</div>
+            <div class="skill-list">Python, Django, RESTful API, MySQL</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-name">設計工具</div>
+            <div class="skill-list">Figma, Canva</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-name">系統工具</div>
+            <div class="skill-list">Linux, Ubuntu, Postman, Wireshark, Cisco Packet Tracer</div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">專業證照</div>
+          <div class="cert-item">
+            <div class="cert-name">ERP企業軟體應用師(鼎新)</div>
+            <div class="cert-org">TQC/EEC</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Python程式設計</div>
+            <div class="cert-org">ITS Certiport</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">HTML5網頁設計</div>
+            <div class="cert-org">TQC+</div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">語言能力</div>
+          <div class="toeic-score">TOEIC 665分</div>
+        </div>
+        <!-- <div class="section">
+          <div class="section-title">駕照</div>
+          <div class="skill-list">
+            • 重型機車駕照<br>
+            • 小型車駕照
+          </div>
+        </div> -->
+      </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
