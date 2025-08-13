@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>陳以婕｜個人網頁（入門精簡版）</title>
+  <meta name="description" content="陳以婕｜後端 / 全端新人工程師。熟悉 Vue.js、Django、REST API、MySQL。這是一個入門、好維護、含註解的個人頁面範本。" />
+  <style>
+    :root {
+      --bg: #ffffff;          /* 網站背景 */
+      --text: #222222;        /* 主要文字 */
+      --muted: #666666;       /* 次要文字 */
+      --primary: #0ea5e9;     /* 主色（天藍） */
+      --card: #f7f9fc;        /* 卡片底色 */
+      --border: #e5e7eb;      /* 邊框色 */
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Microsoft JhengHei", "Noto Sans TC", Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      scroll-behavior: smooth; 
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(1000px, 92vw); margin: 0 auto; }
+
+    /* ====== Header / Nav ====== */
+    .header { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+    .brand { font-weight: 700; letter-spacing: .3px; }
+    .menu { display: flex; gap: 12px; }
+    .menu a { color: var(--muted); padding: 6px 8px; border-radius: 8px; }
+    .menu a:hover { background: #eef6ff; color: var(--text); }
+
+    /* 手機版：用漢堡按鈕切換選單顯示 */
+    .hamburger { display: none; background: none; border: 0; font-size: 24px; }
+    @media (max-width: 768px){
+      .menu { display: none; }
+      .header.open .menu { display: flex; flex-direction: column; padding: 8px 0; }
+      .hamburger { display: block; }
+    }
+
+    /* ====== Hero ====== */
+    .hero { padding: 28px 0 16px; }
+    .hero h1 { margin: 8px 0 8px; font-size: clamp(22px, 4vw, 34px); }
+    .hero p { color: var(--muted); margin: 0; }
+    .actions { display: flex; gap: 10px; margin-top: 14px; }
+    .btn { display: inline-block; border: 1px solid var(--border); background: #fff; padding: 8px 14px; border-radius: 10px; }
+    .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* ====== Sections ====== */
+    section { padding: 28px 0; border-top: 1px solid var(--border); }
+    .section-title { font-size: 20px; margin: 0 0 8px; }
+    .section-desc  { color: var(--muted); margin: 0 0 18px; }
+
+    /* ====== Cards + Grid ====== */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+    .grid { display: grid; gap: 12px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    @media (min-width: 768px){
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ====== Tag chips ====== */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chip { background: #eef6ff; color: #0b69a3; border: 1px solid #dbeafe; padding: 4px 8px; border-radius: 999px; font-size: 14px; }
+
+    /* ====== 表單 ====== */
+    label { display: block; font-weight: 600; margin-top: 8px; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 10px; font: inherit; }
+    textarea { min-height: 110px; }
+
+    /* ====== Footer ====== */
+    footer { text-align: center; color: var(--muted); padding: 24px 0; border-top: 1px solid var(--border); }
+
+    /* ====== 小工具：間距 ====== */
+    .mt-8  { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-18 { margin-top: 18px; }
+      /* ====== 照片（大頭照） ====== */
+    .hero-grid { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: center; }
+    @media (min-width: 768px){
+      .hero-grid { grid-template-columns: 1.2fr .8fr; }
+    }
+    .avatar-wrap { display: flex; justify-content: center; }
+    @media (min-width: 768px){ .avatar-wrap { justify-content: flex-end; } }
+    .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; /* 讓臉不要被裁掉可微調 Y 值，例如 20% 表示稍微往下 */ object-position: 50% 20%; /* 用外圈陰影當邊框：不會吃到圖片 */ box-shadow: 0 0 0 4px var(--border); }
+  </style>
+</head>
+<body>
+  <!-- Header：品牌 + 導覽連結（手機用漢堡按鈕） -->
+  <header class="header" id="top">
+    <div class="container nav">
+      <div class="brand">陳以婕</div>
+      <button class="hamburger" id="hamburger" aria-label="開啟選單">☰</button>
+      <nav class="menu" id="menu">
+        <a href="#about">關於</a>
+        <a href="#skills">技能</a>
+        <a href="#projects">作品</a>
+        <a href="#exp">經歷/學歷</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero：一句話介紹 + 兩個簡單按鈕 -->
+    <section class="hero container">
+      <div class="hero-grid">
+        <!-- 左：文字敘述 -->
+        <div>
+          <p>🎯 前端 / 後端 / 全端 / 資料庫 新人工程師 · 台中</p>
+          <h1>嗨，我是 <strong>陳以婕</strong>，把資料與介面變成好用的產品。</h1>
+          <p>熟悉 Vue.js、Django、REST API、MySQL。專題做過智慧零售儀表管理系統（零售數據通）。</p>
+          <div class="actions">
+            <a class="btn primary" href="#projects">看作品</a>
+            <a class="btn" href="#contact">合作洽談</a>
+            <a class="btn" href="陳以婕 - 履歷.pdf" download>下載履歷 PDF</a>
+            <a class="btn" href="https://github.com/eva1029" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+        
+        <!-- 右：大頭照（請將圖片檔與此 HTML 放在同一資料夾） -->
+        <div class="avatar-wrap">
+          <img class="avatar" src="profile.jpg" alt="陳以婕 大頭照" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- About：兩個小卡片 -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">關於我</h2>
+        <p class="section-desc">穩健務實、重視團隊但也能獨立解決問題；對資安與網路架構有興趣，喜歡透過實作學習。</p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>我能做什麼</h3>
+            <ul>
+              <li>把 <b>需求 → 資料模型 → API → 介面</b> 串起來</li>
+              <li>用 <b>Django</b> 實作 REST API，整合 <b>MySQL</b></li>
+              <li>在 <b>Vue.js</b> 做出乾淨頁面與基本 RWD</li>
+              <li>具 <b>Linux</b> 基礎與簡易部署經驗</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>專題亮點（智慧零售儀表管理系統）</h3>
+            <ul>
+              <li>前端：Vue.js + Chart.js 呈現銷售 / 庫存 / 營收</li>
+              <li>後端：Django/DRF 登入、權限、操作紀錄</li>
+              <li>資料：MySQL 設計、API 串接 ERP/POS（模擬）</li>
+              <li>安全：帳號審核 + 雙重驗證（OTP）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">技能</h2>
+        <p class="section-desc">常用與正在學習的工具。</p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Frontend</h3>
+            <div class="chips">
+              <span class="chip">HTML5</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Vue.js</span>
+              <span class="chip">RWD</span>
+              <span class="chip">Chart.js</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Backend</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">Django / DRF</span>
+              <span class="chip">REST API</span>
+              <span class="chip">MySQL</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>工具 / 其他</h3>
+            <div class="chips">
+              <span class="chip">Git</span>
+              <span class="chip">Postman</span>
+              <span class="chip">Linux / Ubuntu</span>
+              <span class="chip">Figma</span>
+              <span class="chip">Wireshark</span>
+              <span class="chip">Packet Tracer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2 mt-18">
+          <div class="card">
+            <h3>證照（擇要）</h3>
+            <ul>
+              <li>ERP 企業軟體應用師（鼎新）</li>
+              <li>Python 程式設計（ITS Certiport）</li>
+              <li>HTML5 網頁設計（TQC+）</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>語言</h3>
+            <p>TOEIC 665 分</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">作品</h2>
+        <p class="section-desc">放 2～3 個最代表你的作品。每個 3～5 行重點敘述即可。</p>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>智慧零售儀表管理系統（零售數據通）</h3>
+            <p class="mt-8">Vue.js + Django + MySQL</p>
+            <ul class="mt-8">
+              <li>擔任後台主要開發：使用者 / 角色 / 模組 / 權限 CRUD</li>
+              <li>雙重驗證 + 帳號審核，強化系統安全性</li>
+              <li>設計並串接 RESTful API，前後端資料互動</li>
+              <li>完成操作紀錄與查詢模組</li>
+            </ul>
+            <p class="mt-12"><a href="https://github.com/eva1029/Project" target="_blank" rel="noreferrer">GitHub</a></p>
+          </article>
+
+          <article class="card">
+            <h3>商品介紹與購物車（Figma Prototype）</h3>
+            <p class="mt-8">UI/UX ・ Wireframe/Mockup</p>
+            <ul class="mt-8">
+              <li>頁面：商品介紹、購物車流程</li>
+              <li>內容：資訊階層、操作路徑與元件狀態</li>
+              <li>提供設計檔與互動原型連結</li>
+            </ul>
+            <p class="mt-12"><a href="https://www.figma.com/design/O4kSHbIzPImcIsOrJ6iqyz/24%E7%B5%84-%E9%99%B3%E4%BB%A5%E5%A9%95%E3%80%81%E7%8E%8B%E6%80%9D%E6%82%8C?node-id=0-1&t=nPwCDcOwbilFeD6D-1" target="_blank" rel="noreferrer">在 Figma 查看</a></p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="exp">
+      <div class="container">
+        <h2 class="section-title">經歷與學歷</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>工作經驗</h3>
+            <ul>
+              <li><b>暑期工讀生｜台中市立圖書館東區分館</b>（2022/7 - 2022/8）<br>每日處理 200+ 本書籍、製作宣傳素材、支援行政。</li>
+              <li class="mt-8"><b>電訪工讀生｜台中順天儒林補習班</b>（2021/3 - 2021/6）<br>執行電話招生與名單追蹤、包裝 500+ 宣傳物品。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>學歷</h3>
+            <ul>
+              <li><b>國立臺北商業大學</b>｜資訊管理學系（2023/9 - 2025/6）</li>
+              <li class="mt-8"><b>國立臺中科技大學</b>｜企業管理科五專（2018/9 - 2023/7）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">聯絡我</h2>
+        <p class="section-desc">台中市 · 0953-352-786 · 最快方式：Email</p>
+
+        <div class="card">
+          <p>📧 <a href="mailto:eva.chen102923@gmail.com">eva.chen102923@gmail.com</a>　｜　📞 <a href="tel:0953352786">0953-352-786</a></p>
+          <p>🐙 GitHub：<a href="https://github.com/eva1029" target="_blank" rel="noreferrer">github.com/eva1029</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> 陳以婕
+  </footer>
+
+  <script>
+    const header = document.querySelector('.header');
+    const hamburger = document.getElementById('hamburger');
+    hamburger?.addEventListener('click', () => {
+      header.classList.toggle('open');
+    });
+
+    const form = document.getElementById('contact-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+      const name = encodeURIComponent(form.name.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      const msg = encodeURIComponent(form.message.value.trim());
+
+      const subject = `來自 ${decodeURIComponent(name)} 的網站訊息`;
+      const body =
+`聯絡人：${decodeURIComponent(name)}
+Email：${decodeURIComponent(email)}
+
+訊息：
+${decodeURIComponent(msg)}`;
+
+      window.location.href = `mailto:eva.chen102923@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      form.reset();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+  </script>
+</body>
+</html>
